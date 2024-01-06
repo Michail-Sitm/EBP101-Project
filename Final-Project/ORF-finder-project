@@ -1,0 +1,28 @@
+# name all objects and lists
+fcodon = "ATG"
+lcodon = ["TAG", "TAA", "TGA"]
+i = 0
+orf = ""
+
+# prompt the user to input their DNA sequence
+DNA = input("Please enter your DNA sequence (must be in capital letters): ")
+
+# check whether ATG exists in the sequence. if not
+if fcodon in DNA:
+    # first while loop to find start codon. if found, include ATG in the orf. if not continue from the next nucleotide.
+    while i < len(DNA)-2:
+        if DNA[i:i+3] == fcodon:
+            orf += fcodon
+            # second while loop to find stop codon. add each codon that is read into the orf. if found print the orf. if not continue after the next 3 nucleotides
+            while DNA[i:i+3] not in lcodon and i < len(DNA)-2:
+                i += 3
+                codon = DNA[i:i + 3]
+                orf += codon
+            if DNA[i:i+3] in lcodon:
+                print("The open reading frame of the provided sequence is", orf)
+            else:
+                print("No open reading frame was found in the provided sequence.")
+        else:
+            i += 1
+else:
+    print("No open reading frame was found in the provided sequence.")
